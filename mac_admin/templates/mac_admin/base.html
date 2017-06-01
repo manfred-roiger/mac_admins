@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toolbox for Mac Admins</title>
+</head>
+<body>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mac_admin/style.css' %}" />
+<nav>
+    <ul>
+      <li><a href="index">Home</a></li>
+      <li><a href="c2sg">Mac to Static</a></li>
+      <li><a href="mvc2c">Mac to Mac</a></li>
+      <li><a href="about.asp">Import CSV</a></li>
+    </ul>
+</nav>
+<hr>
+{% block content %}{% endblock %}
+<hr>
+<div class="footer">Mac Admins Toolbox - (c) 2017 by iroiger</div>
+</body>
+</html>
