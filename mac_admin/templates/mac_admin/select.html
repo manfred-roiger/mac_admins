@@ -1,10 +1,10 @@
 {% extends "mac_admin/base.html" %}
 {% block content %}
-    <div><h2>Select one or more static groups.</h2></div>
+    <div><h2>Select from software:</h2></div>
     <div>
     <form action="{% url 'mac_admin:select' %}" method="post">
         {% csrf_token %}
-        <div class="ul"; color="#ffffff">{{ form.as_table }}</div>
+        <div>{{ form.as_p }}</div>
         <input type="submit" value="Submit">
     </form>
     </div>

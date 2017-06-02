@@ -23,4 +23,9 @@ class SelectComputer(forms.Form):
 
 class SelectSoftware(forms.Form):
     software_choices = [(sw.group_id, sw.group_name) for sw in ComputerGroup.objects.all()]
-    select_software = forms.MultipleChoiceField(choices=software_choices, widget=forms.CheckboxSelectMultiple())
+    select_software = forms.MultipleChoiceField(choices=software_choices, widget=forms.CheckboxSelectMultiple(), required=True)
+
+
+class ConfirmSoftware(forms.Form):
+    """ A checkbox to confirm software assignment to computer. """
+    confirm_box = forms.BooleanField(required=False)

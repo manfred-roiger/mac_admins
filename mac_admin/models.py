@@ -18,5 +18,7 @@ class ComputerGroup(models.Model):
 
 class ComputerGroupMembership(models.Model):
     computer = models.ForeignKey(Computer, on_delete=models.CASCADE)
-    computer_group = models.ForeignKey(ComputerGroup, on_delete=models.CASCADE)
+    computer_group = models.OneToOneField(ComputerGroup, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return '%s in %s' % (self.computer.computer_name, self.computer_group.group_name)

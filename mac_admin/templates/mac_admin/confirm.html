@@ -1,0 +1,11 @@
+{% extends "mac_admin/base.html" %}
+{% block content %}
+    {% for sw in sw_list %}
+    <div><p>{{ sw }}</p></div>
+    {% endfor %}
+    <form method="post", action="">
+        {% csrf_token %}
+        <hr>
+        <p>The software above was selected, please <input type="submit" value="Confirm">
+    </form>
+{% endblock %}

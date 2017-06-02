@@ -1,0 +1,12 @@
+{% extends "mac_admin/base.html" %}
+{% block content %}
+    <h3>Results for add computer to static group(s):</h3>
+    {% for sw in result_list %}
+    <div><ul><li>{{ sw }}</li></ul></div>
+    {% endfor %}
+    <form method="post", action="">
+        {% csrf_token %}
+        <hr>
+        <p>Back to homepage <input type="submit" value="Confirm">
+    </form>
+{% endblock %}
