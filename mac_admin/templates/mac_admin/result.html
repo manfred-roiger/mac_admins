@@ -1,6 +1,6 @@
 {% extends "mac_admin/base.html" %}
 {% block content %}
-    <h3>Results for add computer to static group(s):</h3>
+    <h3>Results for add computer {{ computer }} to static group(s):</h3>
     {% for sw in result_list %}
     <div><ul><li>{{ sw }}</li></ul></div>
     {% endfor %}
