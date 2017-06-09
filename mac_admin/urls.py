@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^confirm$', views.confirm, name='confirm'),
     url(r'^under_construction$', views.under_construction, name='under_construction'),
     url(r'^result$', views.assign_c2sg, name='assign_c2sg'),
+    url(r'^mac2mac$', views.search_mac2mac, name='mac2mac'),
+    url(r'^selmac2mac$', views.select_mac2mac, name='select_mac2mac'),
 ]

@@ -26,6 +26,7 @@ import json
 import logging
 import os
 import sys
+# TLSAdapter by https://github.com/sheagcraig/python-jss
 from .tlsadapter import TLSAdapter
 from .models import ComputerGroup, Computer, ComputerGroupMembership
 from django.db.utils import IntegrityError
@@ -33,11 +34,30 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 
 class Jss:
+    ''' This class handles all communication with a JSS. The basic connection settings are feteched from a json file
+    and the session to a JSS is established with these connection settings (refere to __init__ method for more info.
+    The class provides the following methods to fetch or update computers and static groups:
 
+            get_all_computers(self):
+                Get all computer objects from JSS and store them in database.
+            get_computer(self, computer):
+                Get a full computer record from JSS.
+            get_static_groups(self):
+                Get all computergroups from JSS and store all static groups in database.
+            get_group_selection(self, software, sg):
+                Not used, could search for a software name (pattern) in static groups.
+            update_groups(self, computer, id_list):
+                Update all static groups in id_list and add computer to those groups.
+            import_group_memberships(self):
+                Read all computer to static group assigments and store them in database.
+    '''
+
+    # Initialize a session
     s = requests.session()
     jss_url = ''
 
     def __init__(self):
+        ''' The init method reads connection settings from a json file and activates those session settings. '''
         # Setup logging
         self.logger = logging.getLogger(__name__)
         # The connection settings must be provided in a JSON file:
@@ -172,6 +192,7 @@ class Jss:
         return put_results
 
     def import_group_memberships(self):
+        ''' Read all computer to static group assigments and store them in database. '''
         all_computers = Computer.objects.all()
         for line in all_computers:
             content = self.get_computer(str(line))
@@ -190,8 +211,10 @@ class Jss:
         self.s.close()
 
 
+# If run as main just import all data to the database to initialize
 if __name__ == '__main__':
     jss = Jss()
     jss.get_all_computers()
     jss.get_static_groups()
     jss.import_group_memberships()
+    jss.end_session()

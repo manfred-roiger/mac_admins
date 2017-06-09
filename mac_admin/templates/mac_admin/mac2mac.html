@@ -1,0 +1,13 @@
+{% extends "mac_admin/base.html" %}
+{% block content %}
+    <div><h3>Search for source and target Mac:</h3></div>
+    <div>
+    <p>All assigments to static groups for source that are in the database can be selected in the next step to copy
+        those assigments to target.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Search">
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "mac_admin/base.html" %}
+{% block content %}
+    <div><h2>Select from software:</h2></div>
+    <div>
+    <form action="{% url 'mac_admin:select_mac2mac' %}" method="post">
+        {% csrf_token %}
+        <div>{{ form.as_p }}</div>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+{% endblock %}
