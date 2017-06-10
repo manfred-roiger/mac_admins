@@ -44,4 +44,4 @@ class ComputerGroupMembership(models.Model):
     assigned_by = models.CharField(max_length=64, default='jss import')
 
     def __str__(self):
-        return '%s in %s by %s' % (self.computer.computer_name, self.computer_group.group_name, self.assigned_by)
+        return self.computer.computer_name

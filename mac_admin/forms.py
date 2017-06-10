@@ -30,7 +30,7 @@ class SelectComputer(forms.Form):
         software = cleaned_data.get('software')
 
         try:
-            my_computer = Computer.objects.get(computer_name=computer)
+            my_computer = Computer.objects.get(computer_name__iexact=computer)
         except ObjectDoesNotExist:
             jss = Jss()
             jss_computer = jss.get_computer(computer)
@@ -72,13 +72,13 @@ class SelectMac2Mac(forms.Form):
 
         # Search for source in database
         try:
-            source_computer = Computer.objects.get(computer_name=source)
+            Computer.objects.get(computer_name__iexact=source)
         except ObjectDoesNotExist:
             to_fetch.append(source)
 
         # Search for target in database
         try:
-            target_computer = Computer.objects.get(computer_name=source)
+            Computer.objects.get(computer_name__iexact=source)
         except ObjectDoesNotExist:
             to_fetch.append(target)
 
@@ -113,4 +113,4 @@ class SelectMac2Mac(forms.Form):
 class SelectSoftware(forms.Form):
     software_choices = [(sw.group_id, sw.group_name) for sw in ComputerGroup.objects.all()]
     select_software = forms.MultipleChoiceField(choices=software_choices, widget=forms.CheckboxSelectMultiple(),
-                                                required=True)
+                                                required=False)

@@ -14,6 +14,7 @@ class ComputerGroupAdmin(admin.ModelAdmin):
 class ComputerGroupMembershipAdmin(admin.ModelAdmin):
     list_display = ('computer', 'computer_group', 'assigned_by', 'date_assigned')
     list_filter = ['date_assigned']
+    search_fields = ['computer__computer_name', 'computer_group__group_name']
 
 admin.site.register(Computer, ComputerAdmin)
 admin.site.register(ComputerGroup, ComputerGroupAdmin)

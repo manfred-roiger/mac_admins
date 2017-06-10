@@ -86,7 +86,7 @@ def assign_c2sg(request):
         return redirect('mac_admin:index', permanent=True)
 
     for gid in request.session['picked']:
-        computer = Computer.objects.get(computer_name=request.session['computer'])
+        computer = Computer.objects.get(computer_name__iexact=request.session['computer'])
         group = ComputerGroup.objects.get(group_id=gid)
 
         # Check if computer to group assignment does already exist
@@ -133,11 +133,11 @@ def search_mac2mac(request):
 def select_mac2mac(request):
     ''' Show all group assigments of source computer and allow user to select groups for target computer. '''
     try:
-        source = Computer.objects.get(computer_name=request.session['source'])
+        source = Computer.objects.get(computer_name__iexact=request.session['source'])
     except ObjectDoesNotExist:
         raise ValidationError('Fatal error: %s does not exist!')
     try:
-        computer = Computer.objects.get(computer_name=request.session['computer'])
+        computer = Computer.objects.get(computer_name__iexact=request.session['computer'])
     except ObjectDoesNotExist:
         raise ValidationError('Fatal error: %s does not exist!')
     software_choices = [(sw.group_id, sw.group_name) for sw in source.computergroup_set.all()]
